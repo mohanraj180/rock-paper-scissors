@@ -39,22 +39,24 @@ let computerPoints = 0;
 let round = 0;
 
 btns.forEach(btn => btn.addEventListener("click", function(event) {
-    // remove game result after five rounds
+    // remove game result and reset player & computer scores after five rounds
     if(document.getElementById("game-result")){
         let element = document.getElementById("game-result");
         element.remove();
+        playerPoints = 0;
+        computerPoints = 0;
     }
-    // remove round result after each round
+    // remove previous round result  
     if(document.getElementById("round-result")){
         let element = document.getElementById("round-result");
         element.remove();
     }
 
 
+    // show each round result
     result = playRound(event);
     console.log(result);
     
-    // show each round result
     const body = document.querySelector("body");
     const div = document.createElement("div");
     body.appendChild(div);
@@ -67,12 +69,18 @@ btns.forEach(btn => btn.addEventListener("click", function(event) {
         computerPoints++;
     }
     round++;
-    console.log(round);
-    console.log(playerPoints);
-    console.log(computerPoints);
+    // display player and computer score
+    let playerScore = document.querySelector("#player-points");
+    playerScore.textContent = playerPoints;
+
+    let computerScore = document.querySelector("#computer-points");
+    computerScore.textContent = computerPoints;
+
+    // console.log(playerPoints);
+    // console.log(computerPoints);
 
     // reset to round "0" and show game result after five rounds
-    if(round === 5){
+    if(playerPoints === 5 || computerPoints === 5){
         round = 0;
         const body = document.querySelector("body");
         const div = document.createElement("div");
